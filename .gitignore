@@ -13,3 +13,9 @@ yarn.lock
 
 # The development sqlite file
 database/development.sqlite
+
+fullchain.pem
+
+privkey.pem
+
+fileList.txt
