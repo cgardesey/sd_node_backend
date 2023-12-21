@@ -1,0 +1,38 @@
+@layout('layout.app')
+
+@section('content')
+<main class="py-4">
+    <div class="container">
+        @if(auth.user.connected === 1)
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">Time Running Elsewhere</div>
+                    <div class="card-body">
+                        <div class="alert alert-info">
+                            <span class="sr-only"></span>You can only have one "Past Questions" page opened. Please close any "Past Questions" page(s) on this or any other device(s) you are logged in to and refresh this page.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @else
+        <!--<div class="dropdown" >-->
+            <!--<button id="dLabel" role="button" data-toggle="dropdown" class="btn btn-outline-primary">-->
+                <!--@{{ selectedPath }}-->
+            <!--</button>-->
+            <!--<multi-level-dropdown-->
+                    <!--:nodes="nodes">-->
+            <!--</multi-level-dropdown>-->
+        <!--</div>-->
+        <!--<hr/>-->
+        <!--<timer
+                :user_id="{{ auth.user.id }}"
+                :timeremaining="{{ auth.user.timeremaining }}">
+        </timer>-->
+        <past-questions></past-questions>
+        <spinner></spinner>
+        @endif
+    </div>
+</main>
+@endsection

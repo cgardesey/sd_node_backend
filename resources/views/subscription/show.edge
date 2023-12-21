@@ -1,0 +1,111 @@
+@layout('layout.app')
+
+@section('content')
+  <main class="py-4">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          @if(pending_subscription_exists)
+            <div class="card">
+              <div class="card-header">Processing Subscription</div>
+
+              <div class="card-body">
+                <div class="alert alert-info">
+                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  <span class="sr-only"></span>Please complete subscription on the mobile money number you supplied and refresh this page.
+                </div>
+              </div>
+            </div>
+          @else
+            <div class="card">
+              <div class="card-header">Subscription</div>
+
+              <div class="card-body">
+                @include('includes.notification')
+                <form method="POST" action="/subscriptions">
+                  {{ csrfField() }}
+
+                  <div class="form-group row">
+                    <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
+
+                    <div class="col-md-6">
+                      <input
+                              id="name"
+                              type="text"
+                              class="form-control {{ hasErrorFor('name') ? 'is-invalid' : '' }}"
+                              name="name"
+
+                              autocomplete="name"
+                              autofocus
+                              value="{{ old('name', auth.user.username) }}"
+                              pattern=".{3,}"   required title="3 characters minimum">
+
+                      @if(hasErrorFor('name'))
+                        <span class="invalid-feedback" role="alert">
+                                <strong>{{ getErrorFor('name') }}</strong>
+                                </span>
+                      @endif
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label for="email" class="col-md-4 col-form-label text-md-right">Subscription Plan</label>
+
+                    <div class="col-md-6">
+                      <div class="radio">
+                        <label><input type="radio" name="description" value="1 day @ GHC1.00" required> 1 day @ GHC1.00</label>
+                      </div>
+                      <div class="radio">
+                        <label><input type="radio" name="description" value="7 days @ GHC5.00"> 7 days @ GHC5.00</label>
+                      </div>
+                      <div class="radio">
+                        <label><input type="radio" name="description" value="30 days @ GHC20.00"> 30 days @ GHC20.00</label>
+                      </div>
+                      @if(hasErrorFor('description'))
+                        <span class="invalid-feedback" role="alert">
+                                <strong>{{ getErrorFor('description') }}</strong>
+                                </span>
+                      @endif
+                    </div>
+
+                  </div>
+
+                  <div class="form-group row">
+                    <label for="mobileno" class="col-md-4 col-form-label text-md-right">Registered MTN mobile money number</label>
+
+                    <div class="col-md-6">
+                      <input
+                              id="mobileno"
+                              type="text"
+                              class="form-control {{ hasErrorFor('mobileno') ? 'is-invalid' : '' }}"
+                              name="mobileno"
+
+                              autocomplete="mobileno"
+                              value="{{ old('mobileno', '') }}"
+                              placeholder="format. 233XXXXXXXXX"
+                              required pattern="[0-9]{12}">
+
+                      @if(hasErrorFor('mobileno'))
+                        <span class="invalid-feedback" role="alert">
+                                <strong>{{ getErrorFor('mobileno') }}</strong>
+                                </span>
+                      @endif
+                    </div>
+                  </div>
+
+                  <div class="form-group row mb-0">
+                    <div class="col-md-6 offset-md-4">
+                      <button type="submit" class="btn btn-primary">
+                        Subscribe
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          @endif
+        </div>
+      </div>
+    </div>
+  </main>
+@endsection

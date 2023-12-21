@@ -1,0 +1,110 @@
+@layout('layout.app')
+
+@section('content')
+  <main class="py-4">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="card">
+            <div class="card-header">Register</div>
+
+            <div class="card-body">
+              @include('includes.notification')
+              <form method="POST" action="{{ route('register') }}">
+                {{ csrfField() }}
+
+                <div class="form-group row">
+                  <label for="username" class="col-md-4 col-form-label text-md-right">Name</label>
+
+                  <div class="col-md-6">
+                    <input
+                            id="username"
+                            type="text"
+                            class="form-control {{ hasErrorFor('username') ? 'is-invalid' : '' }}"
+                            name="username"
+                            required
+                            autocomplete="name"
+                            autofocus
+                            value="{{ old('username', '') }}">
+
+                    @if(hasErrorFor('username'))
+                      <span class="invalid-feedback" role="alert">
+                                <strong>{{ getErrorFor('username') }}</strong>
+                                </span>
+                    @endif
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="email" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
+
+                  <div class="col-md-6">
+                    <input
+                            id="email"
+                            type="email"
+                            class="form-control {{ hasErrorFor('email') ? 'is-invalid' : '' }}"
+                            name="email"
+                            required
+                            autocomplete="email"
+                            value="{{ old('email', '') }}">
+
+                    @if(hasErrorFor('email'))
+                      <span class="invalid-feedback" role="alert">
+                                <strong>{{ getErrorFor('email') }}</strong>
+                                </span>
+                    @endif
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
+
+                  <div class="col-md-6">
+                    <input
+                            id="password"
+                            type="password"
+                            class="form-control {{ hasErrorFor('password') ? 'is-invalid' : '' }}"
+                            name="password"
+                            required
+                            autocomplete="password"
+                            value="{{ old('password', '') }}">
+
+                    @if(hasErrorFor('password'))
+                      <span class="invalid-feedback" role="alert">
+                                <strong>{{ getErrorFor('password') }}</strong>
+                                </span>
+                    @endif
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="password_confirmation" class="col-md-4 col-form-label text-md-right">Confirm Password</label>
+
+                  <div class="col-md-6">
+                    <input
+                            id="password_confirmation"
+                            type="password"
+                            class="form-control {{ hasErrorFor('password_confirmation') ? 'is-invalid' : '' }}"
+                            name="password_confirmation"
+                            required
+                            autocomplete="password_confirmation"
+                            value="{{ old('password_confirmation', '') }}">
+                  </div>
+                </div>
+
+                <div class="form-group row mb-0">
+                  <div class="col-md-6 offset-md-4">
+                    <button type="submit" class="btn btn-primary">
+                      Register
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+@endsection
