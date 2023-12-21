@@ -1,6 +1,6 @@
 # AdonisJS WebSocket Application for School Direct Student App
 
-This is a project that manages . The core functionality of the application is handled by the `ChatController` class, which manages WebSocket connections and message handling.
+This is a project that manages WebSocket connections for [School Direct Student App](https://github.com/cgardesey/SchoolDirectStudent). The core functionality of the application is handled by the `ChatController` class, which manages WebSocket connections and message handling.
 
 ## Prerequisites
 
